@@ -10,14 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MenuSuper"
-            android:label="@string/title_activity_menu_super"
+            android:name=".AgregarUsuario"
+            android:label="@string/title_activity_agregar_usuario"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MenuSuper"
+            android:label="@string/title_activity_menu_super"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".ui.login.LoginActivity"
@@ -40,7 +45,7 @@
         <activity
             android:name=".activities.UserTableActivity"
             android:label="@string/title_activity_user_table"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

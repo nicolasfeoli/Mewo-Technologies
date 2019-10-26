@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:orientation="vertical"
+        android:layout_height="fill_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#09B6EB"
+            android:id="@+id/toolbar"/>
+
+        <TextView
+            android:id="@+id/tituloAgregarUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Agregar Usuario"
+            android:textAlignment="center"
+            android:textSize="16pt"></TextView>
+
+        <EditText
+            android:id="@+id/dni"
+            android:layout_height="wrap_content"
+            android:hint="DNI"
+            android:inputType="numberDecimal"
+            android:layout_width="fill_parent">
+        </EditText>
+        <EditText
+            android:id="@+id/nombreUsuario"
+            android:layout_height="wrap_content"
+            android:hint="Nombre"
+            android:inputType="textPersonName"
+            android:layout_width="fill_parent">
+        </EditText>
+        <EditText
+            android:id="@+id/apellidoUsuario"
+            android:layout_height="wrap_content"
+            android:hint="Apellido"
+            android:inputType="textPersonName"
+            android:layout_width="fill_parent">
+        </EditText>
+        <Spinner
+            android:id="@+id/SpinnerTipoUsuario"
+            android:layout_height="wrap_content"
+            android:prompt="@string/tipoUsuario"
+            android:layout_width="fill_parent"
+            android:entries="@array/tipoUsuarioList">
+        </Spinner>
+
+    </LinearLayout>
+</ScrollView>

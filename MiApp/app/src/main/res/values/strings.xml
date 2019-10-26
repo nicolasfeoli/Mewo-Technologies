@@ -17,4 +17,12 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_menu_super">MenuSuper</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="usuario">Usuario</string>
+    <string name="title_activity_agregar_usuario">AgregarUsuario</string>
+    <string name="tipoUsuario1">Estudiante</string>
+    <string name="tipoUsuario2">Profesor</string>
+    <string name="tipoUsuario3">Administrador</string>
+    <string name="tipoUsuario4">Super</string>
+    <string name="tipoUsuario">Tipo Usuario</string>
 </resources>

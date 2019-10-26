@@ -3,6 +3,7 @@ package com.exampleprueba.nicolasfeoli.miapp.ui.login;
 import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -19,6 +20,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.exampleprueba.nicolasfeoli.miapp.MenuSuper;
+import com.exampleprueba.nicolasfeoli.miapp.Model.DAO;
 import com.exampleprueba.nicolasfeoli.miapp.R;
 import com.exampleprueba.nicolasfeoli.miapp.ui.login.LoginViewModel;
 import com.exampleprueba.nicolasfeoli.miapp.ui.login.LoginViewModelFactory;
@@ -65,21 +68,23 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
             @Override
             public void onChanged(@Nullable LoginResult loginResult) {
-                authenticate();
                 if (loginResult == null) {
                     return;
                 }
                 loadingProgressBar.setVisibility(View.GONE);
                 if (loginResult.getError() != null) {
                     showLoginFailed(loginResult.getError());
+                    //Toast.makeText(getApplicationContext(),"Nop", Toast.LENGTH_LONG).show();
                 }
                 if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
+                    //Toast.makeText(getApplicationContext(),"Funciona", Toast.LENGTH_LONG).show();
+
+                    //updateUiWithUser(loginResult.getSuccess());
                 }
                 setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
-                finish();
+                //finish();
             }
         });
 
@@ -120,39 +125,26 @@ public class LoginActivity extends AppCompatActivity {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
+                //TODO
+                //Intent i = new Intent(getApplicationContext(), MenuSuper.class);
+                //StartActivity(i);
+                DAO instance = new DAO();
+                Toast.makeText(getApplicationContext(),"Toast Test", Toast.LENGTH_LONG);
+                boolean resultado = instance.authenticate(usernameEditText.getText().toString(),passwordEditText.getText().toString());
+                if(resultado)
+                    Toast.makeText(getApplicationContext(),"funciona", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Nop", Toast.LENGTH_LONG).show();
             }
         });
     }
-
+/*
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
-
+*/
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
-    }
-
-    private void authenticate() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.128.21:8151/ApiServer/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        LoginService loginService = retrofit.create(LoginService.class);
-        Call<UserSession> call = loginService.getLoginToken(new LoginInfo("1111", "Te$t1234"));
-
-        call.enqueue(new Callback<UserSession>() {
-            @Override
-            public void onResponse(Call<UserSession> call, Response<UserSession> response) {
-                Log.v("PRUEBA",response.body().toString());
-                Toast.makeText(getApplicationContext(),"test",Toast.LENGTH_SHORT);
-            }
-
-            @Override
-            public void onFailure(Call<UserSession> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),"error",Toast.LENGTH_SHORT);
-            }
-        });
     }
 }

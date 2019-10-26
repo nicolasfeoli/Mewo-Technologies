@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tipoUsuarioList">
+        <item>@string/tipoUsuario1</item>
+        <item>@string/tipoUsuario2</item>
+        <item>@string/tipoUsuario3</item>
+        <item>@string/tipoUsuario4</item>
+    </string-array>
+</resources>
