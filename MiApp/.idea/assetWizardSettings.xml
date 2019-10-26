@@ -36,7 +36,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="opacityPercent" value="60" />
+                                                <entry key="opacityPercent" value="80" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -47,8 +47,9 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="$PROJECT_DIR$/../../Documentos Programathon 2019 - Mewö Technologies/Logos DEHVI/logotipo Fundación DEHVI-04.png" />
-                                      <entry key="outputName" value="LogoBN" />
+                                      <entry key="imageAsset" value="$PROJECT_DIR$/../../Documentos Programathon 2019 - Mewö Technologies/Logos DEHVI/menu-button-of-three-horizontal-lines.png" />
+                                      <entry key="outputName" value="logo_menu_dark" />
+                                      <entry key="theme" value="HOLO_DARK" />
                                       <entry key="themeColor" value="ffffff" />
                                     </map>
                                   </option>

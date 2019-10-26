@@ -9,6 +9,7 @@ import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -21,6 +22,12 @@ import android.widget.Toast;
 import com.exampleprueba.nicolasfeoli.miapp.R;
 import com.exampleprueba.nicolasfeoli.miapp.ui.login.LoginViewModel;
 import com.exampleprueba.nicolasfeoli.miapp.ui.login.LoginViewModelFactory;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -54,9 +61,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //TODO
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
             @Override
             public void onChanged(@Nullable LoginResult loginResult) {
+                authenticate();
                 if (loginResult == null) {
                     return;
                 }
@@ -123,5 +132,27 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    private void authenticate() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://192.168.128.21:8151/ApiServer/api/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        LoginService loginService = retrofit.create(LoginService.class);
+        Call<UserSession> call = loginService.getLoginToken(new LoginInfo("1111", "Te$t1234"));
+
+        call.enqueue(new Callback<UserSession>() {
+            @Override
+            public void onResponse(Call<UserSession> call, Response<UserSession> response) {
+                Log.v("PRUEBA",response.body().toString());
+                Toast.makeText(getApplicationContext(),"test",Toast.LENGTH_SHORT);
+            }
+
+            @Override
+            public void onFailure(Call<UserSession> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),"error",Toast.LENGTH_SHORT);
+            }
+        });
     }
 }
