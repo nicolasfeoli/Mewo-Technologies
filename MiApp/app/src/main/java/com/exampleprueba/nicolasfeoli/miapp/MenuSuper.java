@@ -1,9 +1,11 @@
 package com.exampleprueba.nicolasfeoli.miapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.exampleprueba.nicolasfeoli.miapp.ui.login.LoginActivity;
 
@@ -62,11 +65,21 @@ public class MenuSuper extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.logout:
-                msg = "Logout";
+                //msg = "Logout";
                 Log.d("LOGOUT","LOGOUT");
-                Intent intent = new Intent(MenuSuper.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                new AlertDialog.Builder(this)
+                        .setTitle("Cerrar Sesión")
+                        .setMessage("Desea cerrar sesión?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                Toast.makeText(getApplicationContext(), "Cerrando Sesion", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(MenuSuper.this, LoginActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
                 break;
         }
         return super.onOptionsItemSelected(item);
