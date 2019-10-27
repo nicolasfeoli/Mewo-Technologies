@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.exampleprueba.nicolasfeoli.miapp.ui.login.LoginActivity;
+
 public class MenuSuper extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -61,6 +63,10 @@ public class MenuSuper extends AppCompatActivity {
         {
             case R.id.logout:
                 msg = "Logout";
+                Log.d("LOGOUT","LOGOUT");
+                Intent intent = new Intent(MenuSuper.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);

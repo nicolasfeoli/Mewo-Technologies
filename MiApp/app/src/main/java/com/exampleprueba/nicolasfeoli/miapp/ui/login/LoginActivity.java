@@ -1,6 +1,7 @@
 package com.exampleprueba.nicolasfeoli.miapp.ui.login;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -139,22 +141,24 @@ public class LoginActivity extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(),"Toast Test", Toast.LENGTH_LONG);
 
                 //launchActivity();
-                //Log.d("Mierda 1 ---", " ME CAGOOOOO");
+                //Log.d("Mierda 1 ---", " ME CAGOOOOO")
 
-                doLogin(usernameEditText.getText().toString(),passwordEditText.getText().toString());
-                /*
-                boolean resultado = instance.authenticate(usernameEditText.getText().toString(),passwordEditText.getText().toString());
-                if(resultado)
-                    Toast.makeText(getApplicationContext(),"funciona", Toast.LENGTH_LONG).show();
-                Toast.makeText(getApplicationContext(),"Nop", Toast.LENGTH_LONG).show();
+                if(isOnline()) {
+                    doLogin(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+                }
+                else
+                {
+                    Log.d("Error","Internet");
+                    Toast.makeText(getApplicationContext(),R.string.errorInternet,Toast.LENGTH_SHORT).show();
+                }
 
-                 */
             }
         });
 
         if(!isOnline())
         {
-            Toast.makeText(getApplicationContext(),"No hay",Toast.LENGTH_LONG).show();
+            Log.d("Error","Internet");
+            Toast.makeText(getApplicationContext(),R.string.errorInternet,Toast.LENGTH_SHORT).show();
         }
     }
 /*
@@ -204,12 +208,14 @@ public class LoginActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     Log.d("SUCCESS ---", " ME CAGOOOOO PERO FUE SUCCESFUL");
-                    if(temp.equals("")){
-                        Log.d("Mierda 1 ---", " ME CAGOOOOO Y ES IGUAL A STR VACIO");
-                        //Toast.makeText(LoginActivity.this, "The username is incorrect", Toast.LENGTH_LONG).show();
+                    if(response.code()==401){
+                        Log.d("Error", "Usuario o Contraseña Incorrecta");
+                        //Toast.makeText(LoginActivity.this, "Error. Usuario Incorrecto", Toast.LENGTH_LONG).show();
+                        //clearAll();
                     } else if (temp.equals("invalid_username_or_password")){
-                        Log.d("Mierda 2 ---", " ME CAGOOOOO X2");
-                        //Toast.makeText(LoginActivity.this, "The password is incorrect", Toast.LENGTH_LONG).show();
+                        Log.d("Error", "Contraseña Incorrecta");
+                        //clearPass();
+                        //Toast.makeText(LoginActivity.this, "Error. Contraseña Incorrecta", Toast.LENGTH_LONG).show();
                     } else {
                         try {
                             Log.d("PICHA", temp);
@@ -240,9 +246,17 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 } else {
-
-                    Log.d("Mierda 3 ---", response.toString());
-                    //Toast.makeText(LoginActivity.this, "Network error...", Toast.LENGTH_LONG).show();
+                    //EditText passwordEditText = findViewById(R.id.password);
+                    //passwordEditText.setError("Contraseña Incorrecta");
+                    //Log.d("Mierda 3 ---", response.toString());
+                    Log.d("Error", "Usuario o Contraseña Incorrecta");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            clearAll();
+                            Toast.makeText(LoginActivity.this, "Error: Usuario o Contraseña Incorrecta", Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
             }
 
@@ -257,5 +271,22 @@ public class LoginActivity extends AppCompatActivity {
     private void launchActivity() {
         Intent intent = new Intent(this, AgregarUsuario.class);
         startActivity(intent);
+    }
+
+    private void clearAll(){
+        final EditText usernameEditText = findViewById(R.id.username);
+        final EditText passwordEditText = findViewById(R.id.password);
+        usernameEditText.setText("");
+        passwordEditText.setText("");
+        Toast.makeText(LoginActivity.this, "Error. Usuario Incorrecto", Toast.LENGTH_LONG).show();
+    }
+
+    private void clearPass(){
+
+        final EditText passwordEditText = findViewById(R.id.password);
+        //passwordEditText = findViewById(R.id.password);
+        passwordEditText.setError("Contraseña Incorrecta");
+        passwordEditText.setText("");
+        Toast.makeText(LoginActivity.this, "Error. Contraseña Incorrecta", Toast.LENGTH_LONG).show();
     }
 }

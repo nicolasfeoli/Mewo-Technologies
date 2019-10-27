@@ -25,4 +25,6 @@
     <string name="tipoUsuario3">Administrador</string>
     <string name="tipoUsuario4">Super</string>
     <string name="tipoUsuario">Tipo Usuario</string>
+    <string name="errorLogin">Usuario o Contraseña Incorrecta.</string>
+    <string name="errorInternet">No tiene conexión a internet.</string>
 </resources>
