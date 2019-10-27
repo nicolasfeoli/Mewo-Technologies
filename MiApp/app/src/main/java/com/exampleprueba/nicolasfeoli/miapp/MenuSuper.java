@@ -1,17 +1,22 @@
 package com.exampleprueba.nicolasfeoli.miapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 public class MenuSuper extends AppCompatActivity {
 
     Toolbar toolbar;
+    EditText editText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +28,13 @@ public class MenuSuper extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Menu");
         getSupportActionBar().setSubtitle("Subtitulo");
+
+        Intent myIntent = getIntent(); // gets the previously created intent
+        String given_name = myIntent.getStringExtra("givenName"); // will return "FirstKeyValue"
+        //Log.d("PRUEBA", given_name);
+        editText = (EditText) findViewById(R.id.name);
+        editText.setText(given_name);
+        //String secondKeyName= myIntent.getStringExtra("secondKeyName"); // will return "SecondKeyValue"
 /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:orientation="vertical"
-        android:layout_height="fill_parent">
+        android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
@@ -23,36 +23,87 @@
             android:layout_height="wrap_content"
             android:text="Agregar Usuario"
             android:textAlignment="center"
-            android:textSize="16pt"></TextView>
+            android:textSize="16pt"
+            android:padding="25dp" ></TextView>
 
         <EditText
             android:id="@+id/dni"
             android:layout_height="wrap_content"
             android:hint="DNI"
             android:inputType="numberDecimal"
-            android:layout_width="fill_parent">
+            android:layout_width="fill_parent"
+            android:padding="25dp" >
         </EditText>
         <EditText
             android:id="@+id/nombreUsuario"
             android:layout_height="wrap_content"
             android:hint="Nombre"
             android:inputType="textPersonName"
-            android:layout_width="fill_parent">
+            android:layout_width="fill_parent"
+            android:padding="25dp" >
         </EditText>
         <EditText
             android:id="@+id/apellidoUsuario"
             android:layout_height="wrap_content"
             android:hint="Apellido"
             android:inputType="textPersonName"
-            android:layout_width="fill_parent">
+            android:layout_width="fill_parent"
+            android:padding="25dp" >
         </EditText>
         <Spinner
             android:id="@+id/SpinnerTipoUsuario"
             android:layout_height="wrap_content"
             android:prompt="@string/tipoUsuario"
             android:layout_width="fill_parent"
-            android:entries="@array/tipoUsuarioList">
+            android:entries="@array/tipoUsuarioList"
+            android:padding="25dp" >
         </Spinner>
+
+        <!--Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:enabled="false"
+            android:text="Cancelar" />
+
+        <Button
+            android:id="@+id/btnAgregar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:enabled="false"
+            android:text="Agregar" /-->
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btnCancelar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="start"
+                    android:text="Cancelar"
+                    android:layout_margin="10dp" />
+
+                <Button
+                    android:id="@+id/btnAgregar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="start"
+                    android:text="Agregar"
+                    android:layout_margin="10dp"/>
+            </TableRow>
+
+        </TableLayout>
 
     </LinearLayout>
 </ScrollView>
