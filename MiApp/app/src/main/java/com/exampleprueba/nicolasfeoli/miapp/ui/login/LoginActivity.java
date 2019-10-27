@@ -179,7 +179,11 @@ public class LoginActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient();
 
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, "{\"username\":\"1111\",\"password\":\"Te$t1234\"}");
+        Log.d("Username ", username);
+        Log.d("Password ", password);
+        String req = "{\"username\":\""+ username +"\",\"password\":\"" + password + "\"}";
+        Log.d("Request ",req);
+        RequestBody body = RequestBody.create(mediaType, req);
         Request request = new Request.Builder()
                 .url("http://192.168.128.21:8151/ApiServer/api/login")
                 .post(body)
@@ -216,7 +220,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             //launchActivity();
                             //login start main activity
-                            Intent intent = new Intent(LoginActivity.this, AgregarUsuario.class);/////------------------------
+                            Intent intent = new Intent(LoginActivity.this, MenuSuper.class);/////------------------------
                             intent.putExtra("access_token", login_data.getString("access_token"));
                             intent.putExtra("expires_in", login_data.getInt("expires_in"));
                             intent.putExtra("token_type", login_data.getString("token_type"));
@@ -236,7 +240,8 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 } else {
-                    Log.d("Mierda 3 ---", " ME CAGOOOOO DEMASIADO");
+
+                    Log.d("Mierda 3 ---", response.toString());
                     //Toast.makeText(LoginActivity.this, "Network error...", Toast.LENGTH_LONG).show();
                 }
             }
